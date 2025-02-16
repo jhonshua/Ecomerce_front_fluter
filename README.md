@@ -16,6 +16,12 @@ For help getting started with Flutter development, view the
 samples, guidance on mobile development, and a full API reference.
 
 
+```bash
+## ✨ Code-base structure
+
+El proyecto viene con una estructura sencilla e intuitiva que se presenta a continuación:
+
+< PROJECT ROOT TEST TECHNICAL>
 my_flutter_app/
 ├── lib/
 │   ├── main.dart
@@ -43,3 +49,9 @@ my_flutter_app/
 │   ├── assets/
 │   │     ├── icons/
 │   │     ├── images/
+
+|-- ************************************************************************
+
+```
+
+<br />
