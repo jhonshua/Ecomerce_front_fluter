@@ -25,12 +25,21 @@ my_flutter_app/
 │   │   ├── screen2.dart
 │   │   ├── screen3.dart
 │   │   ├── screen4.dart
-│   │   
+│   │   ├── splash_screen.dart
+│   │  
 │   ├── widgets/
 │   │   ├── custom_bottom_navigation_bar.dart
+│   │   ├── carousel_widget.dart
+│   │   ├── search_widget.dart
 │   │   
 │   ├── utils/
-│   │   ├── constants.dart (opcional, para colores, estilos, etc.)
-│   │     
+│   │   ├── app_textstyles.dart
+│   │   ├── app_themes.dart
+│   │
+│   │       
 │   ├── models/
-        ├── app_state.dart
+│   │     ├── app_state.dart
+│   │     
+│   ├── assets/
+│   │     ├── icons/
+│   │     ├── images/

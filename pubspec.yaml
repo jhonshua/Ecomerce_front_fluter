@@ -24,11 +24,12 @@ dev_dependencies:
 
 
 flutter:
-
-
   uses-material-design: true
 
-  
-assets:
-    - icons/my_icon.png
+  assets:
+    - assets/images/img1.png
+    - assets/images/img2.png
+    - assets/images/img3.png
+    - assets/images/img4.png
+    - assets/images/img5.png
 

@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import '../models/app_state.dart';
 import '../utils/app_textstyles.dart'; // Importa los estilos de texto
 import '../widgets/search_widget.dart'; // Importa el widget de búsqueda
+import '../widgets/carousel_widget.dart'; // Importa el widget del carrusel
+import '../widgets/category_filter_widget.dart'; // Importa el nuevo widget de filtros
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -41,6 +43,12 @@ class _HomeScreenState extends State<HomeScreen> {
               searchController: _searchController,
               onSearch: _onSearch,
             ),
+            const SizedBox(height: 20),
+            // Carrusel de imágenes
+            CarouselWidget(),
+            const SizedBox(height: 20),
+            // Filtros de categorías
+            CategoryFilterWidget(),
             const SizedBox(height: 20),
             Text('Usuario: ${appState.userName}', style: AppTextStyle.bodyLarge),
             const SizedBox(height: 20),
