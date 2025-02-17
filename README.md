@@ -1,6 +1,9 @@
-# tienda
+# Ecomerce 
 
-A new Flutter project.
+![alt text](img1_readme.png) 
+
+![alt text](img2_readme.png)
+
 
 ## Getting Started
 
@@ -47,12 +50,12 @@ TIENDA/
 │   │       
 │   ├── models/
 │   │     ├── app_state.dart
-│   │     ├── dataProduct.json
 │   │     ├── product_model.dart
 │   │     
 │   ├── assets/
 │   │     ├── icons/
 │   │     ├── images/
+│   │     ├── dataProduct.json
 
 |-- ************************************************************************
 

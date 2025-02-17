@@ -8,27 +8,17 @@ import '../widgets/carousel_widget.dart'; // Importa el widget del carrusel
 import '../widgets/category_filter_widget.dart'; // Importa el widget de filtros
 import '../widgets/countdown_widget.dart'; // Importa el nuevo widget de cuenta regresiva
 
-
-
-
-
 // Definición de la pantalla principal (HomeScreen)
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-
-
 // Estado de la pantalla principal
 class _HomeScreenState extends State<HomeScreen> {
 
-  
   // Controlador de texto para el campo de búsqueda
   final TextEditingController _searchController = TextEditingController();
-
-
-
 
   // Función que maneja la búsqueda
   void _onSearch() {
