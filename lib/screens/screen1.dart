@@ -17,15 +17,8 @@ class Screen1 extends StatelessWidget {
           children: [
             Text('Usuario: ${appState.userName}'),
             SizedBox(height: 20),
-            Text('Contador: ${appState.counter}'),
+            Text('Contador:='),
             SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                // Reinicia el contador
-                appState.resetCounter();
-              },
-              child: Text('Reiniciar contador'),
-            ),
           ],
         ),
       ),

@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'models/app_state.dart';
 import 'screens/home_screen.dart';
 import 'screens/screen1.dart';
 import 'screens/screen2.dart';
 import 'screens/screen3.dart';
 import 'screens/screen4.dart';
 import 'widgets/custom_bottom_navigation_bar.dart';
-import 'utils/app_themes.dart';
+
 
 class MainScreen extends StatefulWidget {
   @override

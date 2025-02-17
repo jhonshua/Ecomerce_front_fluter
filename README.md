@@ -22,7 +22,8 @@ samples, guidance on mobile development, and a full API reference.
 El proyecto viene con una estructura sencilla e intuitiva que se presenta a continuación:
 
 < PROJECT ROOT TEST TECHNICAL>
-my_flutter_app/
+
+TIENDA/
 ├── lib/
 │   ├── main.dart
 │   ├── screens/
@@ -37,6 +38,7 @@ my_flutter_app/
 │   │   ├── custom_bottom_navigation_bar.dart
 │   │   ├── carousel_widget.dart
 │   │   ├── search_widget.dart
+│   │   ├── product_grid_widget.dart
 │   │   
 │   ├── utils/
 │   │   ├── app_textstyles.dart
@@ -45,6 +47,8 @@ my_flutter_app/
 │   │       
 │   ├── models/
 │   │     ├── app_state.dart
+│   │     ├── dataProduct.json
+│   │     ├── product_model.dart
 │   │     
 │   ├── assets/
 │   │     ├── icons/
