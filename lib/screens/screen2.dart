@@ -7,18 +7,17 @@ class Screen2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pantalla 2'),
+        title: Text('Favorites'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text('Esta es la Pantalla 2'),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: Text('Volver a Home'),
+            Icon(Icons.favorite, size: 100, color: Colors.red),
+            SizedBox(height: 20),
+            Text(
+              'Your favorite products will appear here',
+              style: TextStyle(fontSize: 18),
             ),
           ],
         ),

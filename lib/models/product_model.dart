@@ -8,6 +8,7 @@ class Product {
   final List<String> filtros;
   final String? nota;
   final List<String>? color;
+  final List<String>? talla; // 🔹 Nueva propiedad para tallas
   final int puntuacion;
 
   Product({
@@ -18,6 +19,7 @@ class Product {
     required this.filtros,
     this.nota,
     this.color,
+    this.talla, // 🔹 Incluimos `talla` en el constructor
     required this.puntuacion,
   });
 
@@ -31,9 +33,12 @@ class Product {
       filtros: List<String>.from(json["filtros"]),
       nota: json["nota"] ?? json["note"], // Maneja posibles diferencias de clave
       color: json["color"] != null ? List<String>.from(json["color"]) : null,
+      talla: json["talla"] != null ? List<String>.from(json["talla"]) : null, // 🔹 Convertimos tallas
       puntuacion: json["puntuacion"],
     );
   }
+
+  get selectedColor => null;
 
   // 🔹 Convierte un objeto Product a JSON
   Map<String, dynamic> toJson() {
@@ -45,6 +50,7 @@ class Product {
       "filtros": filtros,
       "nota": nota,
       "color": color,
+      "talla": talla, // 🔹 Agregamos `talla` en la conversión a JSON
       "puntuacion": puntuacion,
     };
   }

@@ -4,13 +4,12 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'product_model.dart';
 
 class AppState with ChangeNotifier {
-  
   // 🔹 Estado del usuario
   String _userName = "Invitado";
   bool _isLoggedIn = false;
 
   // 🔹 Estado del carrito
-  final List<Product> _cart = [];
+  final List<Map<String, dynamic>> _cart = [];
   double _totalPrice = 0.0;
 
   // 🔹 Estado de los productos
@@ -19,7 +18,7 @@ class AppState with ChangeNotifier {
   // 🔹 Getters
   String get userName => _userName;
   bool get isLoggedIn => _isLoggedIn;
-  List<Product> get cart => List.unmodifiable(_cart);
+  List<Map<String, dynamic>> get cart => List.unmodifiable(_cart);
   double get totalPrice => _totalPrice;
   List<Product> get products => List.unmodifiable(_products);
 
@@ -27,19 +26,18 @@ class AppState with ChangeNotifier {
   // ✅ CARGAR PRODUCTOS DESDE JSON
   // =======================================
   Future<void> loadProducts() async {
-    try {
-      final String jsonString = await rootBundle.loadString('assets/dataProduct.json');
-      _products = Product.fromJsonList(jsonString);
-      notifyListeners();
-    } catch (e) {
-      print("Error cargando productos: $e");
-    }
+  try {
+    final String jsonString = await rootBundle.loadString('assets/dataProduct.json');
+    _products = Product.fromJsonList(jsonString); // ✅ Ahora sí existe este método
+    notifyListeners();
+  } catch (e) {
+    print("Error cargando productos: $e");
   }
+}
 
   // =======================================
   // ✅ MÉTODOS PARA MANEJAR USUARIO
   // =======================================
-
   void login(String name) {
     _userName = name;
     _isLoggedIn = true;
@@ -57,19 +55,20 @@ class AppState with ChangeNotifier {
   // ✅ MÉTODOS PARA MANEJAR EL CARRITO
   // =======================================
 
-  void addToCart(Product product) {
-    _cart.add(product);
-    _totalPrice = (_totalPrice + product.precio).clamp(0, double.infinity);
+  void addToCart(Product product, String size, String color) {
+    _cart.add({
+      "product": product,
+      "size": size,
+      "color": color,
+    });
+    _totalPrice += product.precio;
     notifyListeners();
   }
 
-  void removeFromCart(Product product) {
-    final index = _cart.indexWhere((item) => item.name == product.name);
-    if (index != -1) {
-      _totalPrice = (_totalPrice - _cart[index].precio).clamp(0, double.infinity);
-      _cart.removeAt(index);
-      notifyListeners();
-    }
+  void removeFromCart(Map<String, dynamic> item) {
+    _totalPrice -= item["product"].precio;
+    _cart.remove(item);
+    notifyListeners();
   }
 
   void clearCart() {

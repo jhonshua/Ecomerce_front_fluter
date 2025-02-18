@@ -2,16 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/product_model.dart';
 import '../models/app_state.dart';
-import 'screen3.dart'; // Importamos el carrito
+import 'screen3.dart';
 
-class Screen1 extends StatelessWidget {
+class Screen1 extends StatefulWidget {
   final Product product;
 
   const Screen1({Key? key, required this.product}) : super(key: key);
 
   @override
+  _Screen1State createState() => _Screen1State();
+}
+
+class _Screen1State extends State<Screen1> {
+  String? _selectedSize;
+  String? _selectedColor;
+
+  @override
   Widget build(BuildContext context) {
     final appState = Provider.of<AppState>(context, listen: false);
+    final product = widget.product;
 
     return Scaffold(
       appBar: AppBar(
@@ -37,51 +46,82 @@ class Screen1 extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Text(
-              'Price: \$${product.precio.toStringAsFixed(2)}',
+              '\$${product.precio.toStringAsFixed(2)}',
               style: const TextStyle(fontSize: 18, color: Colors.green),
             ),
             const SizedBox(height: 10),
-            Column(
-  crossAxisAlignment: CrossAxisAlignment.start,
-  children: [
-    const Text(
-      "Color:",
-      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-    ),
-    const SizedBox(height: 5),
-    Wrap(
-      spacing: 8.0,
-      runSpacing: 8.0,
-      children: product.color!.map((color) {
-        return Container(
-          width: 30,
-          height: 30,
-          margin: const EdgeInsets.symmetric(vertical: 8.0),
-          decoration: BoxDecoration(
-            color: Color(int.parse(color.replaceFirst('#', '0xFF'))), // Convierte HEX a Color
-            shape: BoxShape.circle,
-            border: Border.all(color: Colors.black54),
-          ),
-        );
-      }).toList(),
-    ),
-  ], // 🔹 Este corchete cierra correctamente `children`
-), // 🔹 Este paréntesis cierra el `Column`
-
             Text(
-              product.nota.toString(),
+              product.nota ?? "Sin descripción",
               style: const TextStyle(fontSize: 16),
             ),
+            const SizedBox(height: 10),
+
+            // Selección de talla
+            if (product.talla != null) ...[
+              const Text("Selecciona una talla:", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+              Wrap(
+                spacing: 8.0,
+                children: product.talla!.map((size) {
+                  return ChoiceChip(
+                    label: Text(size),
+                    selected: _selectedSize == size,
+                    onSelected: (selected) {
+                      setState(() {
+                        _selectedSize = selected ? size : null;
+                      });
+                    },
+                  );
+                }).toList(),
+              ),
+              const SizedBox(height: 10),
+            ],
+
+            // Selección de color
+            if (product.color != null) ...[
+              const Text("Selecciona un color:", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+              Wrap(
+                spacing: 8.0,
+                children: product.color!.map((colorHex) {
+                  return GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _selectedColor = colorHex;
+                      });
+                    },
+                    child: Container(
+                      width: 30,
+                      height: 30,
+                      decoration: BoxDecoration(
+                        color: Color(int.parse("0xFF${colorHex.substring(1)}")),
+                        borderRadius: BorderRadius.circular(15),
+                        border: Border.all(
+                          color: _selectedColor == colorHex ? Colors.black : Colors.transparent,
+                          width: 2,
+                        ),
+                      ),
+                    ),
+                  );
+                }).toList(),
+              ),
+              const SizedBox(height: 10),
+            ],
+
             const Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton.icon(
                   onPressed: () {
-                    appState.addToCart(product);
+                    if (_selectedSize == null || _selectedColor == null) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text("Por favor, selecciona talla y color")),
+                      );
+                      return;
+                    }
+
+                    appState.addToCart(product, _selectedSize!, _selectedColor!);
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                          content: Text("${product.name} agregado al carrito")),
+                      SnackBar(content: Text("${product.name} agregado al carrito")),
                     );
                   },
                   icon: const Icon(Icons.add_shopping_cart),

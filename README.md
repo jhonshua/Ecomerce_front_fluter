@@ -36,28 +36,30 @@ TIENDA/
 │   │   ├── screen3.dart
 │   │   ├── screen4.dart
 │   │   ├── splash_screen.dart
-│   │  
+│   │
 │   ├── widgets/
 │   │   ├── custom_bottom_navigation_bar.dart
 │   │   ├── carousel_widget.dart
 │   │   ├── search_widget.dart
 │   │   ├── product_grid_widget.dart
-│   │   
+│   │
 │   ├── utils/
 │   │   ├── app_textstyles.dart
 │   │   ├── app_themes.dart
 │   │
-│   │       
 │   ├── models/
-│   │     ├── app_state.dart
-│   │     ├── product_model.dart
-│   │     
+│   │   ├── app_state.dart
+│   │   ├── product_model.dart
+│   │
+│   ├── controllers/  
+│   │   ├── auth_controller.dart       // Para login/logout
+│   │   ├── cart_controller.dart       // Para manejar el carrito
+│   │   ├── product_controller.dart    // Para cargar productos desde JSON
+│   │
 │   ├── assets/
-│   │     ├── icons/
-│   │     ├── images/
-│   │     ├── dataProduct.json
-
-|-- ************************************************************************
+│   │   ├── icons/
+│   │   ├── images/
+│   │   ├── dataProduct.json ************************************************************************
 
 ```
 

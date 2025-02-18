@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';// la importación principal de Flutter que proporciona acceso a todos los widgets y herramientas .
 import 'package:provider/provider.dart';//para manejar el estado de la aplicación de forma eficiente.
 import 'package:tienda/widgets/product_grid_widget.dart';
+import 'package:tienda/widgets/user_widget.dart';
 import '../models/app_state.dart';//probablemente define una clase llamada AppState, que almacena y maneja el estado global de la aplicación.
 import '../widgets/search_widget.dart'; // Importa el widget de búsqueda
 import '../widgets/carousel_widget.dart'; // Importa el widget del carrusel
@@ -46,6 +47,8 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SingleChildScrollView( // Permite desplazamiento si el contenido es largo
         child: Column(
           children: [
+
+            UserWidget(),
             // Widget de búsqueda con el controlador y la función de búsqueda
             SearchWidget(
               searchController: _searchController,

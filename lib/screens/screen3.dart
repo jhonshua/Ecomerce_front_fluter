@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/app_state.dart';
-import '../models/product_model.dart';
 
 class Screen3 extends StatelessWidget {
   const Screen3({Key? key}) : super(key: key);
@@ -13,63 +12,81 @@ class Screen3 extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Carrito de Compras'),
+        title: const Text("Carrito de Compras"),
       ),
       body: cart.isEmpty
-          ? const Center(child: Text("Tu carrito está vacío 😔"))
-          : Column(
-              children: [
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: cart.length,
-                    itemBuilder: (context, index) {
-                      final Product product = cart[index];
+          ? const Center(
+              child: Text(
+                "El carrito está vacío",
+                style: TextStyle(fontSize: 18),
+              ),
+            )
+          : ListView.builder(
+              itemCount: cart.length,
+              itemBuilder: (context, index) {
+                final item = cart[index];
 
-                      return Card(
-                        margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                        child: ListTile(
-                          leading: Image.network(
-                            product.url,
-                            width: 50,
-                            height: 50,
-                            fit: BoxFit.cover,
-                          ),
-                          title: Text(product.name),
-                          subtitle: Text('\$${product.precio.toStringAsFixed(2)}'),
-                          trailing: IconButton(
-                            icon: const Icon(Icons.delete, color: Colors.red),
-                            onPressed: () {
-                              appState.removeFromCart(product);
-                            },
-                          ),
-                        ),
-                      );
-                    },
+                return Card(
+                  margin: const EdgeInsets.all(10),
+                  child: ListTile(
+                    leading: Image.network(
+                      item["product"].url,
+                      width: 50,
+                      height: 50,
+                      fit: BoxFit.cover,
+                    ),
+                    title: Text(item["product"].name),
+                    subtitle: Text(
+                      "Talla: ${item["size"]} | Color: ${item["color"]}\n\$${item["product"].precio}",
+                    ),
+                    trailing: IconButton(
+                      icon: const Icon(Icons.remove_circle, color: Colors.red),
+                      onPressed: () {
+                        appState.removeFromCart(item);
+                      },
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
+                );
+              },
+            ),
+      bottomNavigationBar: cart.isNotEmpty
+          ? Container(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "Total: \$${appState.totalPrice.toStringAsFixed(2)}",
+                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        'Total: \$${appState.totalPrice.toStringAsFixed(2)}',
-                        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(height: 10),
                       ElevatedButton(
-                        onPressed: cart.isEmpty ? null : () {
+                        onPressed: () {
                           appState.clearCart();
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text("Compra realizada con éxito 🎉")),
+                            const SnackBar(content: Text("Carrito vaciado")),
                           );
                         },
-                        child: const Text("Finalizar compra"),
+                        child: const Text("Vaciar Carrito"),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text("Compra realizada con éxito")),
+                          );
+                          appState.clearCart();
+                        },
+                        child: const Text("Finalizar Compra"),
                       ),
                     ],
                   ),
-                ),
-              ],
-            ),
+                ],
+              ),
+            )
+          : null,
     );
   }
 }
