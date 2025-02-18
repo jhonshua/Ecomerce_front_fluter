@@ -37,10 +37,37 @@ class Screen1 extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Text(
-              '\$${product.precio.toStringAsFixed(2)}',
+              'Price: \$${product.precio.toStringAsFixed(2)}',
               style: const TextStyle(fontSize: 18, color: Colors.green),
             ),
             const SizedBox(height: 10),
+            Column(
+  crossAxisAlignment: CrossAxisAlignment.start,
+  children: [
+    const Text(
+      "Color:",
+      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+    ),
+    const SizedBox(height: 5),
+    Wrap(
+      spacing: 8.0,
+      runSpacing: 8.0,
+      children: product.color!.map((color) {
+        return Container(
+          width: 30,
+          height: 30,
+          margin: const EdgeInsets.symmetric(vertical: 8.0),
+          decoration: BoxDecoration(
+            color: Color(int.parse(color.replaceFirst('#', '0xFF'))), // Convierte HEX a Color
+            shape: BoxShape.circle,
+            border: Border.all(color: Colors.black54),
+          ),
+        );
+      }).toList(),
+    ),
+  ], // 🔹 Este corchete cierra correctamente `children`
+), // 🔹 Este paréntesis cierra el `Column`
+
             Text(
               product.nota.toString(),
               style: const TextStyle(fontSize: 16),
@@ -53,7 +80,8 @@ class Screen1 extends StatelessWidget {
                   onPressed: () {
                     appState.addToCart(product);
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("${product.name} agregado al carrito")),
+                      SnackBar(
+                          content: Text("${product.name} agregado al carrito")),
                     );
                   },
                   icon: const Icon(Icons.add_shopping_cart),
