@@ -1,5 +1,4 @@
-// Esta es la importación principal de Flutter que proporciona acceso a todos los widgets y herramientas necesarias para construir una interfaz de usuario en Flutter.
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';// la importación principal de Flutter que proporciona acceso a todos los widgets y herramientas .
 import 'package:provider/provider.dart';//para manejar el estado de la aplicación de forma eficiente.
 import 'package:tienda/widgets/product_grid_widget.dart';
 import '../models/app_state.dart';//probablemente define una clase llamada AppState, que almacena y maneja el estado global de la aplicación.

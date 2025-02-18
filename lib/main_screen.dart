@@ -16,7 +16,7 @@ class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 4; // Inicia en Home (índice 4)
 
   final List<Widget> _screens = [
-    Screen1(),
+    Screen2(),
     Screen2(),
     Screen3(),
     Screen4(),
