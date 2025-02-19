@@ -1,4 +1,4 @@
-# Ecomerce 
+# E-commerce
 
 ![alt text](assets/images/img1_readme.png) 
 
