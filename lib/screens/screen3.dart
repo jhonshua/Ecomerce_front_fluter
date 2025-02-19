@@ -14,41 +14,50 @@ class Screen3 extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Carrito de Compras"),
       ),
-      body: cart.isEmpty
-          ? const Center(
-              child: Text(
-                "El carrito está vacío",
-                style: TextStyle(fontSize: 18),
-              ),
-            )
-          : ListView.builder(
-              itemCount: cart.length,
-              itemBuilder: (context, index) {
-                final item = cart[index];
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Color(0xFFFFA726), Color(0xFFFF5722)],
+          ),
+        ),
+        child: cart.isEmpty
+            ? const Center(
+                child: Text(
+                  "El carrito está vacío",
+                  style: TextStyle(fontSize: 18, color: Colors.white),
+                ),
+              )
+            : ListView.builder(
+                itemCount: cart.length,
+                itemBuilder: (context, index) {
+                  final item = cart[index];
 
-                return Card(
-                  margin: const EdgeInsets.all(10),
-                  child: ListTile(
-                    leading: Image.network(
-                      item["product"].url,
-                      width: 50,
-                      height: 50,
-                      fit: BoxFit.cover,
+                  return Card(
+                    margin: const EdgeInsets.all(10),
+                    child: ListTile(
+                      leading: Image.network(
+                        item["product"].url,
+                        width: 50,
+                        height: 50,
+                        fit: BoxFit.cover,
+                      ),
+                      title: Text(item["product"].name),
+                      subtitle: Text(
+                        "Talla: ${item["size"]} | Color: ${item["color"]}\n\\${item["product"].precio}",
+                      ),
+                      trailing: IconButton(
+                        icon: const Icon(Icons.remove_circle, color: Colors.red),
+                        onPressed: () {
+                          appState.removeFromCart(item);
+                        },
+                      ),
                     ),
-                    title: Text(item["product"].name),
-                    subtitle: Text(
-                      "Talla: ${item["size"]} | Color: ${item["color"]}\n\$${item["product"].precio}",
-                    ),
-                    trailing: IconButton(
-                      icon: const Icon(Icons.remove_circle, color: Colors.red),
-                      onPressed: () {
-                        appState.removeFromCart(item);
-                      },
-                    ),
-                  ),
-                );
-              },
-            ),
+                  );
+                },
+              ),
+      ),
       bottomNavigationBar: cart.isNotEmpty
           ? Container(
               padding: const EdgeInsets.all(16),
@@ -57,7 +66,7 @@ class Screen3 extends StatelessWidget {
                 children: [
                   Text(
                     "Total: \$${appState.totalPrice.toStringAsFixed(2)}",
-                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 10),
                   Row(

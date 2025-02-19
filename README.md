@@ -1,9 +1,13 @@
 # Ecomerce 
 
-![alt text](img1_readme.png) 
+![alt text](assets/images/img1_readme.png) 
 
-![alt text](img2_readme.png)
+![alt text](assets/images/img2_readme.png)
 
+
+![alt text](assets/images/img3_readme.png) 
+
+![alt text](assets/images/img4_readme.png)
 
 ## Getting Started
 

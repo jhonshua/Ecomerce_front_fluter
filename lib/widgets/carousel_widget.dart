@@ -62,7 +62,7 @@ class _CarouselWidgetState extends State<CarouselWidget> {
             borderRadius: BorderRadius.circular(10.0),
             boxShadow: [
               BoxShadow(
-                color: Colors.orange.withOpacity(0.5),
+                color: const Color.fromARGB(255, 235, 110, 9),
                 spreadRadius: 2,
                 blurRadius: 5,
                 offset: Offset(0, 3),

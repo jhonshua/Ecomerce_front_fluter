@@ -29,7 +29,7 @@ class CategoryFilterWidget extends StatelessWidget {
           width: 60,
           height: 60,
           decoration: BoxDecoration(
-            color: Colors.orange, // Color naranja
+            color: const Color.fromARGB(255, 255, 115, 0), // Color naranja
             shape: BoxShape.circle,
             boxShadow: [
               BoxShadow(
